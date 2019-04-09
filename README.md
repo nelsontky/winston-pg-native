@@ -1,17 +1,15 @@
 # winston-pg-native
 
-[![CircleCI](https://circleci.com/gh/ofkindness/winston-pg-native/tree/master.svg?style=svg)](https://circleci.com/gh/ofkindness/winston-pg-native/tree/master)
-[![NPM version](https://img.shields.io/npm/v/winston-pg-native.svg)](https://npmjs.org/package/winston-pg-native)
-[![Dependency Status](https://david-dm.org/ofkindness/winston-pg-native.svg?theme=shields.io)](https://david-dm.org/ofkindness/winston-pg-native)
-[![NPM Downloads](https://img.shields.io/npm/dm/winston-pg-native.svg)](https://npmjs.org/package/winston-pg-native)
+[![NPM version](https://img.shields.io/npm/v/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
+[![NPM Downloads](https://img.shields.io/npm/dm/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
 
-A Winston transport for PostgreSQL. Uses high performance of native bindings via libpq.
+A Winston 3.X compatible transport for PostgreSQL. Uses high performance of native bindings via libpq.
 
 ## Installation
 
 ```console
   $ npm install winston
-  $ npm install winston-pg-native
+  $ npm install @pauleliet/winston-pg-native
 ```
 
 You must have a table in your PostgreSQL database, for example:
@@ -28,10 +26,10 @@ CREATE TABLE winston_logs
 
 ## Options
 
--	**connectionString:** The PostgreSQL connection string. Required.
--	**level:** The winston's log level. Optional, default: info
+- **connectionString:** The PostgreSQL connection string. Required.
+- **level:** The winston's log level. Optional, default: info
 - **poolConfig:** Pool specific configuration parameters. Optional.
--	**tableName:** PostgreSQL table name definition. Optional.
+- **tableName:** PostgreSQL table name definition. Optional.
 
 See the default values used:
 
@@ -49,9 +47,9 @@ const options = {
     idleTimeoutMillis: 10000,
     // maximum number of clients the pool should contain
     // by default this is set to 10.
-    max: 10,
+    max: 10
   },
-  tableName: 'winston_logs',
+  tableName: 'winston_logs'
 };
 ```
 
@@ -69,10 +67,11 @@ const logger = new Logger({
       poolConfig: {
         connectionTimeoutMillis: 0,
         idleTimeoutMillis: 0,
-        max: 10,
+        max: 10
       },
-      tableName: 'winston_logs',
-    })]
+      tableName: 'winston_logs'
+    })
+  ]
 });
 
 module.exports = logger;
@@ -91,8 +90,8 @@ This transport supports querying of logs with Loggly-like options. [See Loggly S
 ```js
 const options = {
   fields: ['message'],
-  from: new Date - 24 * 60 * 60 * 1000,
-  until: new Date,
+  from: new Date() - 24 * 60 * 60 * 1000,
+  until: new Date(),
   start: 0,
   limit: 10,
   order: 'desc'
@@ -118,7 +117,7 @@ Streaming allows you to stream your logs back
 //
 // Start at the end.
 //
-logger.stream({ start: -1 }).on('log', (log) => {
+logger.stream({ start: -1 }).on('log', log => {
   console.log(log);
 });
 ```
