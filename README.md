@@ -1,7 +1,7 @@
 # winston-pg-native
 
-[![NPM version](https://img.shields.io/npm/v/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
-[![NPM Downloads](https://img.shields.io/npm/dm/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
+[![NPM version](https://img.shields.io/npm/v/@pauleliet/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
+[![NPM Downloads](https://img.shields.io/npm/dm/@pauleliet/winston-pg-native.svg)](https://npmjs.org/package/@pauleliet/winston-pg-native)
 
 A Winston 3.X compatible transport for PostgreSQL. Uses high performance of native bindings via libpq.
 
