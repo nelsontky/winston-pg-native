@@ -1,9 +1,11 @@
 {
-  "name": "winston-pg-native",
+  "name": "@pauleliet/winston-pg-native",
   "description": "A Winston transport for PostgreSQL. Uses high performance of native bindings.",
   "version": "4.2.0",
   "keywords": [
+    "winston 3.X",
     "winston",
+    "postgres",
     "logging",
     "transport",
     "postgres",
@@ -14,28 +16,31 @@
   "author": {
     "name": "Andrei Tretyakov",
     "email": "andrei.tretyakov@gmail.com",
-    "url": "https://github.com/ofkindness"
+    "url": "https://github.com/petpano"
   },
   "scripts": {
-    "test": "vows --spec ./test/*"
+    "test": "nyc --reporter=text --reporter lcov npm run test:mocha",
+    "test:mocha": "mocha test/*.js test/**/*.js --exit"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ofkindness/winston-pg-native.git"
+    "url": "https://github.com/petpano/winston-pg-native"
   },
-  "homepage": "https://github.com/ofkindness/winston-pg-native",
+  "homepage": "https://github.com/petpano/winston-pg-native",
   "bugs": {
-    "url": "https://github.com/ofkindness/winston-pg-native/issues"
+    "url": "https://github.com/petpano/winston-pg-native/issues"
   },
   "main": "lib/winston-pg-native.js",
   "dependencies": {
+    "abstract-winston-transport": "^0.5.1",
     "flatted": "^2.0.0",
     "moment": "^2.23.0",
     "pg": "^7.8.0",
     "pg-native": "^3.0.0",
     "sql": "^0.78.0",
-    "winston": "^2.4.4"
+    "winston": "^3.0.0",
+    "winston-transport": "^4.3.0"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
@@ -43,6 +48,9 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
+    "hock": "^1.3.3",
+    "mocha": "^6.1.2",
+    "nyc": "^13.3.0",
     "vows": "^0.8.2"
   },
   "engines": {

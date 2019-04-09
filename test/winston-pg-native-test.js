@@ -8,7 +8,7 @@ const assert = require('assert');
 const { Logger } = require('winston');
 const vows = require('vows');
 
-const transport = require('winston/test/transports/transport');
+const transport = require('abstract-winston-transport');
 const Postgres = require('../lib/winston-pg-native.js');
 
 const options = {
@@ -22,17 +22,20 @@ const options = {
   }
 };
 
-vows.describe('winston-pg-native')
+vows
+  .describe('winston-pg-native')
   .addBatch({
-    'An instance of the Postgres Transport': {
-      topic: function topic() {
+    'An instance of the Postgres Transport  :::: ': {
+      topic: function topic(callback) {
         const logger = new Logger({
-          transports: [
-            new Postgres(options)
-          ]
+          transports: [new Postgres(options)]
         }).transports.Postgres;
-        const { callback } = this;
-        logger.init().then(() => callback(null, true));
+        logger
+          .init()
+          .then(() => callback(null, true))
+          .catch((err) => {
+            callback(err);
+          });
       },
       'should create table': (err, result) => {
         assert.isNull(err);
@@ -41,6 +44,6 @@ vows.describe('winston-pg-native')
     }
   })
   .addBatch({
-    'An instance of the Postgres Transport': transport(Postgres, options)
+    'An instance of the Postgres Transport': transport({ name: 'Postgres', Transport: Postgres, construct: options })
   })
   .export(module);
